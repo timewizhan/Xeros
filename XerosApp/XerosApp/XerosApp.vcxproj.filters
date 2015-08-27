@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="XerosApp">
+      <UniqueIdentifier>{d7ede480-582d-4f79-8b12-73509d8eec95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XerosDefault">
+      <UniqueIdentifier>{3d0d5fff-cc66-4959-81a8-55eb98f1707a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{3608c2f3-1da3-4451-b762-e912b899132e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HTMLParser">
+      <UniqueIdentifier>{05373a7b-6375-41a7-86d5-badd396574a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{7e1d4be9-fa80-48e4-aff8-d79f5cc82827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBase">
+      <UniqueIdentifier>{1dac9a51-c87b-4adb-925c-0799060e0b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainOperation">
+      <UniqueIdentifier>{4ca6bcde-847d-4c19-a829-27eff63d8e51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainOperation\Sampling">
+      <UniqueIdentifier>{7823baa4-d484-493c-8d93-ffd5cda4b55a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainOperation\SearchWord">
+      <UniqueIdentifier>{be99f5e3-ff75-4871-8341-3b38b57f6382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RealtimeCheck">
+      <UniqueIdentifier>{ba0f676f-48d4-4dde-85e1-327ce8681d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Browser">
+      <UniqueIdentifier>{8bf61aa6-b4ae-4a87-b09a-4c3daf05b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainOperation\Network">
+      <UniqueIdentifier>{98876ac7-0f21-4eeb-b385-16f6909ca176}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="XerosApp.h">
+      <Filter>XerosApp</Filter>
+    </ClInclude>
+    <ClInclude Include="XerosDlg.h">
+      <Filter>XerosApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>XerosDefault</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>XerosDefault</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>XerosDefault</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLCommon.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLReader.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLStruct.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLSuper.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLTag.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParser\HTMLType.h">
+      <Filter>HTMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Log.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Type.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\Service.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\DataBase.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\DataBaseType.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase\PostgreSQL.h">
+      <Filter>DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\SearchWord\SearchWord.h">
+      <Filter>MainOperation\SearchWord</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\SearchWord\SearchWordType.h">
+      <Filter>MainOperation\SearchWord</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Sampling\Sampling.h">
+      <Filter>MainOperation\Sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Sampling\SamplingType.h">
+      <Filter>MainOperation\Sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="RealTimeCheck.h">
+      <Filter>RealtimeCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="RealTimeCheckType.h">
+      <Filter>RealtimeCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Network\Network.h">
+      <Filter>MainOperation\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Network\NetworkType.h">
+      <Filter>MainOperation\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Analyzer.h">
+      <Filter>MainOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOperation\Operation.h">
+      <Filter>MainOperation</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DataType.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Browser\Browser.h">
+      <Filter>Browser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="XerosApp.cpp">
+      <Filter>XerosApp</Filter>
+    </ClCompile>
+    <ClCompile Include="XerosDlg.cpp">
+      <Filter>XerosApp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>XerosDefault</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLCommon.cpp">
+      <Filter>HTMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLReader.cpp">
+      <Filter>HTMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLTag.cpp">
+      <Filter>HTMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Log.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Service\Service.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\DataBase.cpp">
+      <Filter>DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase\PostgreSQL.cpp">
+      <Filter>DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\SearchWord\SearchWord.cpp">
+      <Filter>MainOperation\SearchWord</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Sampling\Sampling.cpp">
+      <Filter>MainOperation\Sampling</Filter>
+    </ClCompile>
+    <ClCompile Include="RealTimeCheck.cpp">
+      <Filter>RealtimeCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Network\Network.cpp">
+      <Filter>MainOperation\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Analyzer.cpp">
+      <Filter>MainOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Operation.cpp">
+      <Filter>MainOperation</Filter>
+    </ClCompile>
+    <ClCompile Include="Browser\Browser.cpp">
+      <Filter>Browser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="XerosApp.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\XerosApp.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resource\TestTrayIcon.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

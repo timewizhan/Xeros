@@ -1,0 +1,74 @@
+﻿Build started 2015-08-27 오후 6:00:12.
+     1>Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XerosApp.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Browser\Browser.cpp Common\Log.cpp DataBase\DataBase.cpp DataBase\PostgreSQL.cpp HTMLParser\HTMLCommon.cpp HTMLParser\HTMLReader.cpp HTMLParser\HTMLTag.cpp MainOperation\Analyzer.cpp MainOperation\Network\Network.cpp MainOperation\Operation.cpp MainOperation\Sampling\Sampling.cpp MainOperation\SearchWord\SearchWord.cpp RealTimeCheck.cpp Service\Service.cpp
+         Service.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\service\service.cpp(1): warning C4627: '#include "Service.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\service\service.cpp(193): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         RealTimeCheck.cpp
+     1>c1xx : fatal error C1083: Cannot open source file: 'RealTimeCheck.cpp': No such file or directory
+         SearchWord.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\searchword\searchword.cpp(1): warning C4627: '#include "SearchWord.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\searchword\searchword.cpp(200): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Sampling.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\sampling\sampling.cpp(1): warning C4627: '#include "Sampling.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\sampling\sampling.cpp(2): warning C4627: '#include "SamplingType.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\sampling\sampling.cpp(132): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Operation.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\operation.cpp(1): warning C4627: '#include "Operation.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\operation.cpp(189): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Network.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\network\network.cpp(1): warning C4627: '#include "Network.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\network\network.cpp(2): warning C4627: '#include "Log.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\network\network.cpp(187): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Analyzer.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\analyzer.cpp(1): warning C4627: '#include "Analyzer.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\mainoperation\analyzer.cpp(168): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         HTMLTag.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmltag.cpp(1): warning C4627: '#include "HTMLTag.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmltag.cpp(2): warning C4627: '#include "HTMLCommon.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmltag.cpp(155): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         HTMLReader.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmlreader.cpp(1): warning C4627: '#include "HTMLReader.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmlreader.cpp(2): warning C4627: '#include "HTMLCommon.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmlreader.cpp(92): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         HTMLCommon.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmlcommon.cpp(1): warning C4627: '#include "HTMLCommon.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\htmlparser\htmlcommon.cpp(22): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         PostgreSQL.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\database\postgresql.cpp(1): warning C4627: '#include "PostgreSQL.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\database\postgresql.cpp(78): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         DataBase.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\database\database.cpp(1): warning C4627: '#include "DataBase.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\database\database.cpp(2): warning C4627: '#include "PostgreSQL.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\database\database.cpp(75): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Log.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\common\log.cpp(1): warning C4627: '#include "Log.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\common\log.cpp(103): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Browser.cpp
+     1>d:\develop\xerosproject\xerosapp\xerosapp\browser\browser.cpp(1): warning C4627: '#include "Browser.h"': skipped when looking for precompiled header use
+                 Add directive to 'stdafx.h' or rebuild precompiled header
+     1>d:\develop\xerosproject\xerosapp\xerosapp\browser\browser.cpp(96): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+         Generating Code...
+     1>Done Building Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:04.61
