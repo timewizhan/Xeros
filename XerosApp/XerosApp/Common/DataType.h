@@ -20,26 +20,26 @@ struct ST_BROWSER
 	std::string		strFileFullPath;
 };
 
-struct ST_SEARCH_REQ
-{
-	std::vector<std::string> vecstrStrings;
-};
+//struct ST_SEARCH_REQ
+//{
+//	std::vector<std::string> vecstrStrings;
+//};
 
 struct ST_ANALYSIS_RESULT
 {
 	std::vector<std::string> vecstrUrls;
 };
 
-struct ST_RECV_DATA
-{
-	std::vector<char>	vecChar;
-	DWORD				dwTotalSize;
-
-	void operator=(ST_RECV_DATA &refstRecvData) {
-		this->vecChar = refstRecvData.vecChar;
-		this->dwTotalSize = refstRecvData.dwTotalSize;
-	}
-};
+//struct ST_RECV_DATA
+//{
+//	std::vector<char>	vecChar;
+//	DWORD				dwTotalSize;
+//
+//	void operator=(ST_RECV_DATA &refstRecvData) {
+//		this->vecChar = refstRecvData.vecChar;
+//		this->dwTotalSize = refstRecvData.dwTotalSize;
+//	}
+//};
 
 struct ST_RESULT_URLS
 {

@@ -1,5 +1,5 @@
-#include "Sampling.h"
-#include "SamplingType.h"
+#include "..\Sampling\Sampling.h"
+#include "..\Sampling\SamplingType.h"
 
 CSampling::CSampling(HANDLE hDataBase) : m_hDataBase(hDataBase)
 {

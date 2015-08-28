@@ -109,12 +109,6 @@
     <ClInclude Include="MainOperation\Sampling\SamplingType.h">
       <Filter>MainOperation\Sampling</Filter>
     </ClInclude>
-    <ClInclude Include="RealTimeCheck.h">
-      <Filter>RealtimeCheck</Filter>
-    </ClInclude>
-    <ClInclude Include="RealTimeCheckType.h">
-      <Filter>RealtimeCheck</Filter>
-    </ClInclude>
     <ClInclude Include="MainOperation\Network\Network.h">
       <Filter>MainOperation\Network</Filter>
     </ClInclude>
@@ -132,6 +126,12 @@
     </ClInclude>
     <ClInclude Include="Browser\Browser.h">
       <Filter>Browser</Filter>
+    </ClInclude>
+    <ClInclude Include="RealTimeCheck\RealTimeCheck.h">
+      <Filter>RealtimeCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="RealTimeCheck\RealTimeCheckType.h">
+      <Filter>RealtimeCheck</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +171,6 @@
     <ClCompile Include="MainOperation\Sampling\Sampling.cpp">
       <Filter>MainOperation\Sampling</Filter>
     </ClCompile>
-    <ClCompile Include="RealTimeCheck.cpp">
-      <Filter>RealtimeCheck</Filter>
-    </ClCompile>
     <ClCompile Include="MainOperation\Network\Network.cpp">
       <Filter>MainOperation\Network</Filter>
     </ClCompile>
@@ -185,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="Browser\Browser.cpp">
       <Filter>Browser</Filter>
+    </ClCompile>
+    <ClCompile Include="RealTimeCheck\RealTimeCheck.cpp">
+      <Filter>RealtimeCheck</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

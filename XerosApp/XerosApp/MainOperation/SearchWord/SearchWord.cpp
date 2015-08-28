@@ -117,7 +117,7 @@ DWORD CSearchWord::EnumDBWords(std::vector<std::string> &refvecstrEnumWord, std:
 			refvecstWordDBProperty.push_back(stWordDBProperty);
 		}
 	}
-	
+	return E_RET_SUCCESS;
 }
 
 DWORD CSearchWord::ChooseProperWords(std::vector<ST_WORD_DB_PROPERTY>& refvecstWordDBProperty, std::vector<std::string> &refvecstrResult)

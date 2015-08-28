@@ -6,7 +6,8 @@ m_bStartService(FALSE),
 m_bRealTimeCheck(FALSE),
 m_bStartOperatoin(TRUE),
 m_pAnalyzer(NULL),
-m_pNetwork(NULL)
+m_pNetwork(NULL),
+m_pDataBase(NULL)
 {
 	/*
 		when creating operation class, service is registered first of all
@@ -25,13 +26,13 @@ m_pNetwork(NULL)
 	DWORD dwRet;
 	dwRet = m_pService->InitSvc(lpServiceFilePath, lpServiceName, lpServiceName, 0);
 	if (dwRet != SVC_OK) {
-		ErrorLog("Fail to Init service [%s:%d]", __func__, __LINE__);
+		ErrorLog("Fail to Init service [%s:%d]", __FUNCTION__, __LINE__);
 		return;
 	}
 
 	dwRet = m_pService->CreateSvc();
 	if (dwRet != SVC_OK) {
-		ErrorLog("Fail to create service [%s:%d]", __func__, __LINE__);
+		ErrorLog("Fail to create service [%s:%d]", __FUNCTION__, __LINE__);
 		return;
 	}
 	m_bStartService = TRUE;
@@ -43,8 +44,37 @@ m_pNetwork(NULL)
 		return;
 	}
 
+	/*
+		DB Instance is made, and then initialize DB login token
+	*/
+	m_pDataBase = CreateDBInstance(E_DB_POSTGRES);
+	if (!m_pDataBase) {
+		ErrorLog("Fail to create DB Instance");
+		return;
+	}
+
+	/*
+		Argu : ST_DB_LOGIN_TOKEN
+		DatabaseIP is static because this ip is used for only test
+		rest of argument is default value
+	*/
+	ST_DB_LOGIN_TOKEN stDBLoginToken;
+	stDBLoginToken.strUserName = "postgres";
+	
+	// TODO. Password have to be secret
+
+	stDBLoginToken.strPassword = "xeors";
+	stDBLoginToken.strDatabaseIP = "165.132.120.152";
+	stDBLoginToken.strDatabaseName = "postgres";
+	stDBLoginToken.strPort = "5432";
+	dwRet = ConnectToDB(m_pDataBase, stDBLoginToken);
+	if (dwRet != E_RET_SUCCESS) {
+		ErrorLog("Fail to connect to DB [%d]", E_DB_POSTGRES);
+		return;
+	}
+
 	assert(m_pAnalyzer == NULL);
-	m_pAnalyzer = new CAnalyzer();
+	m_pAnalyzer = new CAnalyzer(m_pDataBase);
 	if (m_pAnalyzer == NULL) {
 		ErrorLog("Fail to create analyzer");
 		return;
@@ -55,7 +85,7 @@ m_pNetwork(NULL)
 	if (m_pNetwork == NULL) {
 		ErrorLog("Fail to execute network");
 	}
-	DWORD dwRet;
+
 	dwRet = m_pNetwork->InitNetwork();
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to initialize network");
@@ -66,8 +96,19 @@ m_pNetwork(NULL)
 ///////////////////////////////////////////////////////////////////////////////////
 COperation::~COperation()
 {
-	if (!m_pService)
+	DWORD dwRet;
+	if (!m_pService) {
+		dwRet = m_pService->StopSvc();
+		if (dwRet != SVC_OK) {
+			ErrorLog("Fail to stop service");
+		}
+		dwRet = m_pService->UnloadSvc();
+		if (dwRet != SVC_OK) {
+			ErrorLog("Fail to stop service");
+		}
 		delete m_pService;
+	}
+		
 	if (!m_pRealTimeCheck)
 		delete m_pRealTimeCheck;
 	if (!m_pAnalyzer)
@@ -77,6 +118,7 @@ COperation::~COperation()
 ///////////////////////////////////////////////////////////////////////////////////
 DWORD COperation::StartKeyloggerService()
 {
+	return m_pService->StartSvc();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -184,5 +226,6 @@ DWORD COperation::StartOperation()
 DWORD COperation::StopOperation()
 {
 	m_bStartOperatoin = FALSE;
+	return E_RET_SUCCESS;
 }
 

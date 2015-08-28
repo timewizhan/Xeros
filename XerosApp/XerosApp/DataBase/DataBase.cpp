@@ -26,7 +26,7 @@ HANDLE CreateDBInstance(E_DB_TYPE eDBType)
 	case E_DB_POSTGRES:
 		return (HANDLE) new CPostgreSQL();
 	default:
-		return 0;
+		return NULL;
 		break;
 	}
 	return NULL;

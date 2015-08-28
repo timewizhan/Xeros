@@ -21,7 +21,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -54,10 +54,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpq.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -120,8 +123,8 @@
     <ClInclude Include="MainOperation\Sampling\SamplingType.h" />
     <ClInclude Include="MainOperation\SearchWord\SearchWord.h" />
     <ClInclude Include="MainOperation\SearchWord\SearchWordType.h" />
-    <ClInclude Include="RealTimeCheck.h" />
-    <ClInclude Include="RealTimeCheckType.h" />
+    <ClInclude Include="RealTimeCheck\RealTimeCheck.h" />
+    <ClInclude Include="RealTimeCheck\RealTimeCheckType.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Service\Service.h" />
     <ClInclude Include="stdafx.h" />
@@ -130,20 +133,48 @@
     <ClInclude Include="XerosDlg.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Browser\Browser.cpp" />
-    <ClCompile Include="Common\Log.cpp" />
-    <ClCompile Include="DataBase\DataBase.cpp" />
-    <ClCompile Include="DataBase\PostgreSQL.cpp" />
-    <ClCompile Include="HTMLParser\HTMLCommon.cpp" />
-    <ClCompile Include="HTMLParser\HTMLReader.cpp" />
-    <ClCompile Include="HTMLParser\HTMLTag.cpp" />
-    <ClCompile Include="MainOperation\Analyzer.cpp" />
-    <ClCompile Include="MainOperation\Network\Network.cpp" />
-    <ClCompile Include="MainOperation\Operation.cpp" />
-    <ClCompile Include="MainOperation\Sampling\Sampling.cpp" />
-    <ClCompile Include="MainOperation\SearchWord\SearchWord.cpp" />
-    <ClCompile Include="RealTimeCheck.cpp" />
-    <ClCompile Include="Service\Service.cpp" />
+    <ClCompile Include="Browser\Browser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Common\Log.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DataBase\DataBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DataBase\PostgreSQL.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLCommon.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLReader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="HTMLParser\HTMLTag.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Analyzer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Network\Network.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Operation.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\Sampling\Sampling.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\SearchWord\SearchWord.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="RealTimeCheck\RealTimeCheck.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Service\Service.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

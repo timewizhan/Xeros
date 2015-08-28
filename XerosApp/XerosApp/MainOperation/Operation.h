@@ -20,6 +20,7 @@ class COperation
 	CRealTimeCheck	*m_pRealTimeCheck;
 	CAnalyzer		*m_pAnalyzer;
 	CNetwork		*m_pNetwork;
+	HANDLE			m_pDataBase;
 
 	std::string		m_strURL;
 

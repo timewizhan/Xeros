@@ -25,9 +25,9 @@ DWORD CPostgreSQL::_ConnectToDB(ST_DB_LOGIN_TOKEN &refstDBLoginToken)
 	if (PQstatus(pPGConn) != CONNECTION_OK) {
 		fprintf(stderr, "Connection to database failed: %s", PQerrorMessage(pPGConn));
 		PQfinish(pPGConn);
-		return 0;
+		return E_RET_FAIL;
 	}
-	return 0;
+	return E_RET_SUCCESS;
 }
 
 DWORD CPostgreSQL::_InsertToDB(ST_DB_SQL &refstDBSQL)
@@ -37,9 +37,9 @@ DWORD CPostgreSQL::_InsertToDB(ST_DB_SQL &refstDBSQL)
 		fprintf(stderr, "Fail to insert to database: %s", PQerrorMessage(pPGConn));
 		PQclear(pPGResult);
 		PQfinish(pPGConn);
-		return 0;
+		return E_RET_FAIL;
 	}
-	return 0;
+	return E_RET_SUCCESS;
 }
 
 DWORD CPostgreSQL::_QueryFromDB(ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResult)
@@ -50,7 +50,7 @@ DWORD CPostgreSQL::_QueryFromDB(ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResu
 		fprintf(stderr, "Fail to query to database: %s", PQerrorMessage(pPGConn));
 		PQclear(pPGResult);
 		PQfinish(pPGConn);
-		return 0;
+		return E_RET_FAIL;
 	}
 
 	DWORD dwRow = PQntuples(pPGResult);
@@ -67,11 +67,11 @@ DWORD CPostgreSQL::_QueryFromDB(ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResu
 		}
 		refstDBResult.vecstrResult.push_back(strValue);
 	}
-	return 0;
+	return E_RET_SUCCESS;
 }
 
 DWORD CPostgreSQL::_QuitDB()
 {
 	PQfinish(pPGConn);
-	return 0;
+	return E_RET_SUCCESS;
 }

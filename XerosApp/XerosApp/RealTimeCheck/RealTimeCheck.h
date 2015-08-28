@@ -1,7 +1,7 @@
 #ifndef _REALTIME_CHECK_
 #define _REALTIME_CHECK_
 
-#include "Common\Common.h"
+#include "..\Common\Common.h"
 #include "RealTimeCheckType.h"
 
 #define SLEEP_TIME 1000
