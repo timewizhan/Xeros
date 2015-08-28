@@ -1,0 +1,32 @@
+﻿Build started 2015-08-28 오후 8:02:46.
+     1>Project "D:\Develop\XerosProject\XerosDriver\XerosDriver\XerosDriver.vcxproj" on node 2 (Build target(s)).
+     1>StampInf:
+         C:\Program Files\Windows Kits\8.1\bin\x86\stampinf.exe -d "*" -a "x86" -v "*" -k "1.11" -u "1.11.0" -f Win7Debug\XerosDriver.inf 
+         Stamping Win7Debug\XerosDriver.inf [Version] section with DriverVer=08/28/2015,20.2.50.171
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IWin7Debug\ /Zi /nologo /W4 /WX- /Od /Oi /Oy- /D _X86_=1 /D i386=1 /D STD_CALL /D DEPRECATE_DDK_FUNCTIONS=1 /D MSC_NOOPT /D _WIN32_WINNT=0x0601 /D WINVER=0x0601 /D WINNT=1 /D NTDDI_VERSION=0x06010000 /D DBG=1 /GF /Gm- /Zp8 /GS /Gy /fp:precise /Zc:wchar_t- /Zc:forScope- /GR- /Fo"Win7Debug\\" /Fd"Win7Debug\vc120.pdb" /Gz /wd4748 /wd4603 /wd4627 /wd4986 /wd4987 /wd4996 /FI"C:\Program Files\Windows Kits\8.1\Include\Shared\warning.h" /analyze- /errorReport:prompt /kernel -cbstring /d1import_no_registry /d2AllowCompatibleILVersions /d2Zi+ KbdHook.cpp KbdLog.cpp Klog.cpp ScanCode.cpp
+         KbdHook.cpp
+     1>KbdHook.cpp(161): warning C4100: 'Context' : unreferenced formal parameter
+         KbdLog.cpp
+     1>KbdLog.cpp(65): warning C4127: conditional expression is constant
+     1>KbdLog.cpp(58): warning C4189: 'pKeyboardDeviceOjbect' : local variable is initialized but not referenced
+         Klog.cpp
+     1>Klog.cpp(57): warning C4100: 'RegistryPath' : unreferenced formal parameter
+         ScanCode.cpp
+         Generating Code...
+       Link:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Develop\XerosProject\XerosDriver\Win7Debug\XerosDriver.sys" /VERSION:"6.3" /INCREMENTAL:NO /NOLOGO /WX /SECTION:"INIT,d" "C:\Program Files\Windows Kits\8.1\lib\win7\KM\x86\memcmp.lib" "C:\Program Files\Windows Kits\8.1\lib\win7\KM\x86\BufferOverflowK.lib" "C:\Program Files\Windows Kits\8.1\lib\win7\KM\x86\ntoskrnl.lib" "C:\Program Files\Windows Kits\8.1\lib\win7\KM\x86\hal.lib" "C:\Program Files\Windows Kits\8.1\lib\win7\KM\x86\wmilib.lib" /NODEFAULTLIB /MANIFEST:NO /DEBUG /PDB:"D:\Develop\XerosProject\XerosDriver\Win7Debug\XerosDriver.pdb" /SUBSYSTEM:NATIVE,"6.01" /Driver /OPT:REF /OPT:ICF /ENTRY:"GsDriverEntry@8" /RELEASE /IMPLIB:"D:\Develop\XerosProject\XerosDriver\Win7Debug\XerosDriver.lib" /MERGE:"_TEXT=.text;_PAGE=PAGE" /MACHINE:X86 /PROFILE /kernel /IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221 /osversion:6.3 /pdbcompress /debugtype:pdata Win7Debug\KbdHook.obj
+         Win7Debug\KbdLog.obj
+         Win7Debug\Klog.obj
+         Win7Debug\ScanCode.obj
+         XerosDriver.vcxproj -> D:\Develop\XerosProject\XerosDriver\Win7Debug\XerosDriver.sys
+       DriverTestSign:
+         C:\Program Files\Windows Kits\8.1\bin\x86\signtool.exe sign /ph /sha1 "3FDA8F75B006AB556C8A6544E1C4785BD95F910A" 
+         Done Adding Additional Store
+         Successfully signed: D:\Develop\XerosProject\XerosDriver\Win7Debug\XerosDriver.sys
+         
+     1>Done Building Project "D:\Develop\XerosProject\XerosDriver\XerosDriver\XerosDriver.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:09.66
