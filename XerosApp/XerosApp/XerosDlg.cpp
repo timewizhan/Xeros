@@ -321,5 +321,8 @@ void CXerosDlg::OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/)
 void CXerosDlg::OnXerosClose()
 {
 	// TODO: Add your command handler code here
-	
+	/*
+		Xeros Dialog is exited
+	*/
+	OnOK();
 }
