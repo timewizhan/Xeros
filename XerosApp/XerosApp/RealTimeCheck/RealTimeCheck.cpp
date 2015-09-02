@@ -19,11 +19,18 @@ DWORD CRealTimeCheck::StartRealTimeCheck()
 	{
 		ST_RTC_OPEN_PROCESS stRTCOpenProcess;
 		dwRet = GetCurrentOpenProcess(stRTCOpenProcess);
-		if (dwRet != E_RET_FAIL) {
+		if (dwRet != E_RET_SUCCESS) {
 			throw std::exception("Fail to get current open process");
 		}
 		dwRet = CheckForeGround(stRTCOpenProcess);
-		if (dwRet != E_RET_FAIL) {
+		if (dwRet == E_RET_CHECK_FAIL) {
+			/*
+				nothing to do.
+				cannot find browser on foreground
+			*/
+			DebugLog("Not find browser on foreground");
+		}
+		else if (dwRet != E_RET_SUCCESS) {
 			throw std::exception("Fail to check foreground");
 		}
 	}
@@ -72,8 +79,11 @@ DWORD CRealTimeCheck::GetCurrentOpenProcess(ST_RTC_OPEN_PROCESS &refstRTCOpenPro
 		std::string strExeFile = stProcess32.szExeFile;
 #endif
 		DWORD dwProcessID = stProcess32.th32ProcessID;
+		mapArgu.first = strExeFile;
+		mapArgu.second = dwProcessID;
 		stRTCOpenProcess.mapOpenProcess.insert(mapArgu);
 	}
+	refstRTCOpenProcess = stRTCOpenProcess;
 	return E_RET_SUCCESS;
 }
 
@@ -92,11 +102,11 @@ DWORD CRealTimeCheck::CheckForeGround(ST_RTC_OPEN_PROCESS &refstRTCOpenProcess)
 	::GetWindowThreadProcessId(hforeground, &dwProcessId);
 	std::map<std::string, DWORD>::iterator mapvecIter;
 	for (mapvecIter = refstRTCOpenProcess.mapOpenProcess.begin(); mapvecIter != refstRTCOpenProcess.mapOpenProcess.end(); mapvecIter++) {
-		if (!_stricmp(mapvecIter->first.c_str(), "iexplorer") && mapvecIter->second == dwProcessId) {
+		if (!_stricmp(mapvecIter->first.c_str(), "iexplorer.exe") && mapvecIter->second == dwProcessId) {
 			dwRet = E_RET_SUCCESS;
 			break;
 		}
-		else if (!_stricmp(mapvecIter->first.c_str(), "chrome") && mapvecIter->second == dwProcessId) {
+		else if (!_stricmp(mapvecIter->first.c_str(), "chrome.exe") && mapvecIter->second == dwProcessId) {
 			dwRet = E_RET_SUCCESS;
 			break;
 		}

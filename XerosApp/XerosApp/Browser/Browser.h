@@ -13,9 +13,7 @@ public:
 	~CBrowser();
 
 	DWORD InitBrowser(E_BROWSER_TYPE eBrowserType);
-	DWORD SearchForRequestToInternet(ST_SEARCH_REQ &refstSearchReq, ST_RECV_DATA &refstRecvData);
 	DWORD ExecuteBrowserWithArgs(ST_RESULT_URLS &refstResultUrls);
-	//DWORD GetResultFromRequest();
 };
 
 

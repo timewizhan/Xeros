@@ -4,35 +4,86 @@
     <Filter Include="TestFile">
       <UniqueIdentifier>{713d9627-b4c9-4574-83f7-e3260087a4d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TestFile\DataBase">
+    <Filter Include="TestFile\Common">
+      <UniqueIdentifier>{d136e2e8-d4bc-4423-8a24-0d3b5974cd0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\DataBaseTest">
       <UniqueIdentifier>{ca4a20b7-453c-4093-a54e-4f46591384bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TestFile\DataBase\Origin">
+    <Filter Include="TestFile\DataBaseTest\Origin">
       <UniqueIdentifier>{5fc812ca-6317-4af2-9f48-d64edd81c6e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\BrowserTest">
+      <UniqueIdentifier>{799f6dc1-6ca8-475b-b1f6-3fca289b65cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\BrowserTest\Origin">
+      <UniqueIdentifier>{3d26e969-4a2f-46d2-8576-7c432777cc88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\RealTimeCheck">
+      <UniqueIdentifier>{7c7df6aa-8678-4071-914b-63ec54a612b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\RealTimeCheck\Origin">
+      <UniqueIdentifier>{e83d5b4e-5268-4da7-829d-3b8c5e6fb7eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestMain.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\DataBase.cpp">
-      <Filter>TestFile\DataBase\Origin</Filter>
+      <Filter>TestFile\DataBaseTest\Origin</Filter>
     </ClCompile>
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.cpp">
-      <Filter>TestFile\DataBase\Origin</Filter>
+      <Filter>TestFile\DataBaseTest\Origin</Filter>
     </ClCompile>
     <ClCompile Include="DataBaseTest.cpp">
-      <Filter>TestFile\DataBase</Filter>
+      <Filter>TestFile\DataBaseTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\Browser\Browser.cpp">
+      <Filter>TestFile\BrowserTest\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="BrowserTest.cpp">
+      <Filter>TestFile\BrowserTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\Common\Log.cpp">
+      <Filter>TestFile\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.cpp">
+      <Filter>TestFile\RealTimeCheck\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="RealTimeTest.cpp">
+      <Filter>TestFile\RealTimeCheck</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBase.h">
-      <Filter>TestFile\DataBase\Origin</Filter>
+      <Filter>TestFile\DataBaseTest\Origin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBaseType.h">
-      <Filter>TestFile\DataBase\Origin</Filter>
+      <Filter>TestFile\DataBaseTest\Origin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.h">
-      <Filter>TestFile\DataBase\Origin</Filter>
+      <Filter>TestFile\DataBaseTest\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Browser\Browser.h">
+      <Filter>TestFile\BrowserTest\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Common.h">
+      <Filter>TestFile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\DataType.h">
+      <Filter>TestFile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Log.h">
+      <Filter>TestFile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Type.h">
+      <Filter>TestFile\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.h">
+      <Filter>TestFile\RealTimeCheck\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheckType.h">
+      <Filter>TestFile\RealTimeCheck\Origin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

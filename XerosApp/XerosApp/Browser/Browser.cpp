@@ -35,24 +35,6 @@ DWORD CBrowser::InitBrowser(E_BROWSER_TYPE eBrowserType)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
-DWORD CBrowser::SearchForRequestToInternet(ST_SEARCH_REQ &refstSearchReq, ST_RECV_DATA &refstRecvData)
-{
-	DWORD dwRet = E_RET_SUCCESS;
-
-	CNetwork Network;
-	dwRet = Network.InitNetwork();
-	if (dwRet != E_RET_SUCCESS) {
-		return dwRet;
-	}
-
-	dwRet = Network.QueryFromNetwork(refstSearchReq, refstRecvData);
-	if (dwRet != E_RET_SUCCESS) {
-		return dwRet;
-	}
-	return dwRet;
-}
-
-///////////////////////////////////////////////////////////////////////////////////
 DWORD CBrowser::ExecuteBrowserWithArgs(ST_RESULT_URLS &refstResultUrls)
 {
 	std::string strFilePath = m_stBrowser.strFileFullPath + "\\" + m_stBrowser.strFileName;
@@ -69,18 +51,40 @@ DWORD CBrowser::ExecuteBrowserWithArgs(ST_RESULT_URLS &refstResultUrls)
 			{
 				case 0:
 				case ERROR_FILE_NOT_FOUND:
+					ErrorLog("The system cannot find the file specified [%d]", dwError);
+					break;
 				case ERROR_PATH_NOT_FOUND:
+					ErrorLog("The system cannot find the path specified [%d]", dwError);
+					break;
 				case ERROR_BAD_FORMAT:
+					ErrorLog("An attempt was made to load a program with an incorrect format [%d]", dwError);
+					break;
 				case SE_ERR_ACCESSDENIED:
+					ErrorLog("regular WinExec() code : access denied [%d]", dwError);
+					break;
 				case SE_ERR_ASSOCINCOMPLETE:
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
+					break;
 				case SE_ERR_DDEBUSY:
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
+					break;
 				case SE_ERR_DDEFAIL:
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
+					break;
 				case SE_ERR_DDETIMEOUT:
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
+					break;
 				case SE_ERR_DLLNOTFOUND:
+					ErrorLog("regular WinExec() code : access denied [%d]", dwError);
+					break;
 				case SE_ERR_NOASSOC:
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
+					break;
 				case SE_ERR_OOM:
+					ErrorLog("regular WinExec() code : out of memory [%d]", dwError);
+					break;
 				case SE_ERR_SHARE:
-					ErrorLog("Fail to execute ShellExecute [%d]", dwError);
+					ErrorLog("error values for ShellExecute() beyond the regular WinExec() codes [%d]", dwError);
 					break;
 				default:
 					ErrorLog("Unknown Error");

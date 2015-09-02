@@ -81,15 +81,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\XerosApp\XerosApp\Browser\Browser.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\Common\Log.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\DataBase.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.cpp" />
-    <ClCompile Include="DataBaseTest.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.cpp" />
+    <ClCompile Include="BrowserTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DataBaseTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RealTimeTest.cpp" />
     <ClCompile Include="TestMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\XerosApp\XerosApp\Browser\Browser.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Common.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\DataType.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Log.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\Common\Type.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBase.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBaseType.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheckType.h" />
     <ClInclude Include="Common.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
