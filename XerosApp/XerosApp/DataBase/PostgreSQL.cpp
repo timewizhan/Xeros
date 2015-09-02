@@ -42,6 +42,18 @@ DWORD CPostgreSQL::_InsertToDB(ST_DB_SQL &refstDBSQL)
 	return E_RET_SUCCESS;
 }
 
+DWORD CPostgreSQL::_UpdateToDB(ST_DB_SQL &refstDBSQL)
+{
+	pPGResult = PQexec(pPGConn, refstDBSQL.strSQL.c_str());
+	if (PQresultStatus(pPGResult) != PGRES_COMMAND_OK) {
+		fprintf(stderr, "Fail to insert to database: %s", PQerrorMessage(pPGConn));
+		PQclear(pPGResult);
+		PQfinish(pPGConn);
+		return E_RET_FAIL;
+	}
+	return E_RET_SUCCESS;
+}
+
 DWORD CPostgreSQL::_QueryFromDB(ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResult)
 {
 	pPGResult = PQexec(pPGConn, refstDBSQL.strSQL.c_str());

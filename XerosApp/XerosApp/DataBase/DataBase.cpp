@@ -52,6 +52,16 @@ DWORD InsertToDB(HANDLE hHandle, ST_DB_SQL &refstDBSQL)
 	return dwRet;
 }
 
+DWORD UpdateToDB(HANDLE hHandle, ST_DB_SQL &refstDBSQL)
+{
+	IDataBase *pIDB = NULL;
+	pIDB = (IDataBase *)hHandle;
+
+	DWORD dwRet;
+	dwRet = pIDB->_UpdateToDB(refstDBSQL);
+	return dwRet;
+}
+
 DWORD QueryFromDB(HANDLE hHandle, ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResult)
 {
 	IDataBase *pIDB = NULL;
