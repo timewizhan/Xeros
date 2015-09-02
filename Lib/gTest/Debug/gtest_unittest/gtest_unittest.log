@@ -1,0 +1,16 @@
+﻿Build started 2015-05-03 오전 3:23:32.
+     1>Project "D:\Source\gtest-1.7.0\msvc\gtest_unittest.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I.. /I..\include /Zi /nologo /W3 /WX- /O1 /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"gtest/Debug\gtest_unittest\\" /Fd"gtest/Debug\gtest_unittest\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\test\gtest_unittest.cc
+         gtest_unittest.cc
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"gtest/Debug\gtest_unittest.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"gtest/Debug\gtest_unittest.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"gtest/Debug\gtest_unittest.lib" /MACHINE:X86 /SAFESEH gtest/Debug\gtest_unittest\gtest_unittest.obj
+         "D:\Source\gtest-1.7.0\msvc\gtest\Debug\gtestd.lib"
+         "D:\Source\gtest-1.7.0\msvc\gtest\Debug\gtest_maind.lib"
+     1>gtestd.lib(gtest-all.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         gtest_unittest.vcxproj -> D:\Source\gtest-1.7.0\msvc\gtest/Debug\gtest_unittest.exe
+     1>Done Building Project "D:\Source\gtest-1.7.0\msvc\gtest_unittest.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:10.77

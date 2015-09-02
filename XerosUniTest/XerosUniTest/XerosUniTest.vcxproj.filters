@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TestFile">
+      <UniqueIdentifier>{713d9627-b4c9-4574-83f7-e3260087a4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\DataBase">
+      <UniqueIdentifier>{ca4a20b7-453c-4093-a54e-4f46591384bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\DataBase\Origin">
+      <UniqueIdentifier>{5fc812ca-6317-4af2-9f48-d64edd81c6e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestMain.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\DataBase.cpp">
+      <Filter>TestFile\DataBase\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.cpp">
+      <Filter>TestFile\DataBase\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBaseTest.cpp">
+      <Filter>TestFile\DataBase</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBase.h">
+      <Filter>TestFile\DataBase\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBaseType.h">
+      <Filter>TestFile\DataBase\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.h">
+      <Filter>TestFile\DataBase\Origin</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

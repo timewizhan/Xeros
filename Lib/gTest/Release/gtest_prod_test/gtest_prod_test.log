@@ -1,0 +1,18 @@
+﻿Build started 2015-05-03 오전 3:09:40.
+     1>Project "D:\Source\gtest-1.7.0\msvc\gtest_prod_test.vcxproj" on node 3 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I.. /I..\include /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _CONSOLE /D _MBCS /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"gtest/Release\gtest_prod_test\\" /Fd"gtest/Release\gtest_prod_test\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\test\gtest_prod_test.cc ..\test\production.cc
+         gtest_prod_test.cc
+         production.cc
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"gtest/Release\gtest_prod_test.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"gtest/Release\gtest_prod_test.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"gtest/Release\gtest_prod_test.lib" /MACHINE:X86 /SAFESEH gtest/Release\gtest_prod_test\gtest_prod_test.obj
+         gtest/Release\gtest_prod_test\production.obj
+         "D:\Source\gtest-1.7.0\msvc\gtest\Release\gtest.lib"
+         "D:\Source\gtest-1.7.0\msvc\gtest\Release\gtest_main.lib"
+         gtest_prod_test.vcxproj -> D:\Source\gtest-1.7.0\msvc\gtest/Release\gtest_prod_test.exe
+     1>Done Building Project "D:\Source\gtest-1.7.0\msvc\gtest_prod_test.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:13.88
