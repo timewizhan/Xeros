@@ -90,7 +90,14 @@ m_pDataBase(NULL)
 		ErrorLog("Fail to execute network");
 	}
 
+	/*
 	dwRet = m_pNetwork->InitNetwork();
+	if (dwRet != E_RET_SUCCESS) {
+		ErrorLog("Fail to initialize network");
+	}
+	*/
+
+	dwRet = m_pNetwork->InitNetworkFromCURL();
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to initialize network");
 	}
@@ -155,7 +162,8 @@ DWORD COperation::StartUrlQuery(ST_PROPER_WORD_RET &refstProperWordRet)
 
 	DWORD dwRet;
 	ST_RECV_DATA stRecvData;
-	dwRet = m_pNetwork->QueryFromNetwork(stSearchReq, stRecvData);
+	//dwRet = m_pNetwork->QueryFromNetwork(stSearchReq, stRecvData);
+	dwRet = m_pNetwork->QueryFromNetworkFromCURL(stSearchReq, stRecvData);
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to query network using search word");
 		return dwRet;
@@ -174,7 +182,9 @@ DWORD COperation::StartUrlQuery(ST_PROPER_WORD_RET &refstProperWordRet)
 		ErrorLog("Fail to parse HTML String [%d]", stRecvData.dwTotalSize);
 		return dwRet;
 	}
-	dwRet = HTMLReader.GetURL(m_strURL);
+
+	
+	dwRet = HTMLReader.GetURL(m_stHTMLURLs);
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to get URL");
 		return dwRet;

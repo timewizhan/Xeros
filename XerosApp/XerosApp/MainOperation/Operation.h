@@ -22,7 +22,7 @@ class COperation
 	CNetwork		*m_pNetwork;
 	HANDLE			m_pDataBase;
 
-	std::string		m_strURL;
+	ST_HTML_URLS	m_stHTMLURLs;
 
 	/*
 		below variable is included in decision 
@@ -44,8 +44,8 @@ public:
 
 	DWORD StartOperation();
 	DWORD StopOperation();
-	inline std::string GetUrl() {
-		return m_strURL;
+	inline ST_HTML_URLS GetUrl() {
+		return m_stHTMLURLs;
 	}
 };
 

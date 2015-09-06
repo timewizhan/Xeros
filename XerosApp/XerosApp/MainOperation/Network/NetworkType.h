@@ -16,6 +16,7 @@ struct ST_SEARCH_REQ
 struct ST_RECV_DATA
 {
 	std::vector<char>	vecChar;
+	std::string			strHTMLData;
 	DWORD				dwTotalSize;
 
 	void operator=(ST_RECV_DATA &refstRecvData) {

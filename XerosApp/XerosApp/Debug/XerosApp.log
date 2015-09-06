@@ -1,10 +1,32 @@
-﻿Build started 2015-08-30 오후 10:57:15.
-     1>Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2015-09-06 오후 11:25:09.
+     1>Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XerosApp.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt XerosDlg.cpp
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\Develop\XerosProject\Lib\cURL\include /I"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\XerosApp.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\Develop\XerosProject\Lib\cURL\include /I"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Browser\Browser.cpp Common\Log.cpp DataBase\DataBase.cpp DataBase\PostgreSQL.cpp HTMLParser\HTMLCommon.cpp HTMLParser\HTMLReader.cpp HTMLParser\HTMLTag.cpp MainOperation\Analyzer.cpp MainOperation\Network\Network.cpp MainOperation\Operation.cpp MainOperation\Sampling\Sampling.cpp MainOperation\SearchWord\SearchWord.cpp RealTimeCheck\RealTimeCheck.cpp Service\Service.cpp
+         Service.cpp
+         RealTimeCheck.cpp
+         SearchWord.cpp
+         Sampling.cpp
+         Operation.cpp
+         Network.cpp
+         Analyzer.cpp
+         HTMLTag.cpp
+         HTMLReader.cpp
+         HTMLCommon.cpp
+         PostgreSQL.cpp
+         DataBase.cpp
+         Log.cpp
+         Browser.cpp
+         Generating Code...
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\Develop\XerosProject\Lib\cURL\include /I"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XerosApp.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt XerosApp.cpp XerosDlg.cpp
          XerosDlg.cpp
+         XerosApp.cpp
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files\Windows Kits\8.1\bin\x86\rc.exe /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /l"0x0409" /IDebug\ /nologo /fo"Debug\XerosApp.res" XerosApp.rc 
        Link:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\lib" libpq.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.lib" /MACHINE:X86 Debug\XerosApp.res
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\Develop\XerosProject\Lib\cURL\lib /LIBPATH:"D:\Develop\XerosProject\Lib\PostgreSQL\x86-32\lib" libpq.lib libcurl_imp.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Develop\XerosProject\XerosApp\Debug\XerosApp.lib" /MACHINE:X86 Debug\XerosApp.res
          Debug\Browser.obj
          Debug\Log.obj
          Debug\DataBase.obj
@@ -23,8 +45,8 @@
          Debug\XerosApp.obj
          Debug\XerosDlg.obj
          XerosApp.vcxproj -> D:\Develop\XerosProject\XerosApp\Debug\XerosApp.exe
-     1>Done Building Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" (Build target(s)).
+     1>Done Building Project "D:\Develop\XerosProject\XerosApp\XerosApp\XerosApp.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:31.87
+Time Elapsed 00:00:39.40

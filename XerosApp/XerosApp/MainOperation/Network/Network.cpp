@@ -183,3 +183,98 @@ VOID CNetwork::ErrorCode(DWORD dwErrorCode)
 			ErrorLog("Fail to use select method because of unknown error");
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////////
+DWORD CNetwork::InitNetworkFromCURL()
+{
+	m_pCURL = curl_easy_init();
+	if (m_pCURL == NULL) {
+		return E_RET_FAIL;
+	}
+
+	curl_easy_setopt(m_pCURL, CURLOPT_HEADER, 0);
+	curl_easy_setopt(m_pCURL, CURLOPT_VERBOSE, 0);
+	curl_easy_setopt(m_pCURL, CURLOPT_FOLLOWLOCATION, 1L);
+	curl_easy_setopt(m_pCURL, CURLOPT_FILE, "./output");
+	return E_RET_SUCCESS;
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+DWORD CNetwork::QueryFromNetworkFromCURL(ST_SEARCH_REQ &refstSearchReq, ST_RECV_DATA &refstRecvData)
+{
+	std::vector<std::string>::iterator vecIter;
+	for (vecIter = refstSearchReq.vecstrStrings.begin(); vecIter != refstSearchReq.vecstrStrings.end(); vecIter++) {
+		std::string strSearchWord = (*vecIter);
+		std::string strFullSearch = "http://www.google.com/search?q=" + strSearchWord;
+
+		curl_easy_setopt(m_pCURL, CURLOPT_URL, strFullSearch.c_str());
+		CURLcode CURLRet = curl_easy_perform(m_pCURL);
+		if (CURLRet != CURLE_OK) {
+			ErrorLog("Fail to search from CURL %s", curl_easy_strerror(CURLRet));
+			continue;
+		}
+
+		double	statDouble;
+		long	statLong;
+		char	*statString;
+
+		CURLRet = curl_easy_getinfo(m_pCURL, CURLINFO_HTTP_CODE, &statLong);
+		if (CURLRet != CURLE_OK) {
+			ErrorLog("Fail to get HTTP Code");
+		}
+		DebugLog("HTTP response code : %d", statLong);
+
+		CURLRet = curl_easy_getinfo(m_pCURL, CURLINFO_CONTENT_TYPE, &statString);
+		if (CURLRet != CURLE_OK) {
+			ErrorLog("Fail to get Content Type");
+		}
+		DebugLog("Content Type : %s", statString);
+
+		CURLRet = curl_easy_getinfo(m_pCURL, CURLINFO_SIZE_DOWNLOAD, &statDouble);
+		if (CURLRet != CURLE_OK) {
+			ErrorLog("Fail to get Size Download");
+		}
+		DebugLog("Download Size : %ld bytes", statDouble);
+
+		CURLRet = curl_easy_getinfo(m_pCURL, CURLINFO_SPEED_DOWNLOAD, &statDouble);
+		if (CURLRet != CURLE_OK) {
+			ErrorLog("Fail to get Speed Download");
+		}
+		DebugLog("Download Speed : %ld bytes/sec", statDouble);
+
+		DWORD dwRet;
+		std::string strHTMLData;
+		dwRet = ReadHTMLDataFromFile(strHTMLData);
+		if (dwRet != E_RET_SUCCESS) {
+			continue;
+		}
+
+		refstRecvData.strHTMLData = strHTMLData;
+		refstRecvData.dwTotalSize = strHTMLData.size();
+	}
+	return E_RET_SUCCESS;
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+DWORD CNetwork::ReadHTMLDataFromFile(std::string &refstrHTMLData)
+{
+	FILE *pFile = NULL;
+	DWORD dwRet;
+	dwRet = fopen_s(&pFile, "./output", "r");
+	if (dwRet != 0) {
+		ErrorLog("Fail to open file");
+		return E_RET_FAIL;
+	}
+
+	char szBuf[512] = { 0 };
+	std::string strRealData;
+	strRealData.clear();
+	while (::fgets(szBuf, sizeof(szBuf), pFile))
+	{
+		strRealData += szBuf;
+		::memset(szBuf, 0x00, sizeof(szBuf));
+	}
+
+	refstrHTMLData = strRealData;
+	return E_RET_SUCCESS;
+}
