@@ -25,6 +25,12 @@
     <Filter Include="TestFile\RealTimeCheck\Origin">
       <UniqueIdentifier>{e83d5b4e-5268-4da7-829d-3b8c5e6fb7eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFile\HTMLParser">
+      <UniqueIdentifier>{5f356835-ec13-4c34-b1a8-05ca29edeb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFile\HTMLParser\Origin">
+      <UniqueIdentifier>{f78c171e-48d5-4949-8b2c-7a6e96a31422}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestMain.cpp" />
@@ -51,6 +57,18 @@
     </ClCompile>
     <ClCompile Include="RealTimeTest.cpp">
       <Filter>TestFile\RealTimeCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLCommon.cpp">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLReader.cpp">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLTag.cpp">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParserTest.cpp">
+      <Filter>TestFile\HTMLParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +102,24 @@
     </ClInclude>
     <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheckType.h">
       <Filter>TestFile\RealTimeCheck\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLCommon.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLReader.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLStruct.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLSuper.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLTag.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLType.h">
+      <Filter>TestFile\HTMLParser\Origin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -85,6 +85,9 @@
     <ClCompile Include="..\..\XerosApp\XerosApp\Common\Log.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\DataBase.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLCommon.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLReader.cpp" />
+    <ClCompile Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLTag.cpp" />
     <ClCompile Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.cpp" />
     <ClCompile Include="BrowserTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -92,7 +95,10 @@
     <ClCompile Include="DataBaseTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="RealTimeTest.cpp" />
+    <ClCompile Include="HTMLParserTest.cpp" />
+    <ClCompile Include="RealTimeTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="TestMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +110,12 @@
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBase.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\DataBaseType.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\DataBase\PostgreSQL.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLCommon.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLReader.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLStruct.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLSuper.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLTag.h" />
+    <ClInclude Include="..\..\XerosApp\XerosApp\HTMLParser\HTMLType.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheck.h" />
     <ClInclude Include="..\..\XerosApp\XerosApp\RealTimeCheck\RealTimeCheckType.h" />
     <ClInclude Include="Common.h" />

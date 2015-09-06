@@ -49,4 +49,9 @@ struct ST_HTML_TAG
 	std::vector<ST_HTML_TAG_SIGN>	vecstHTMLTagSign;
 };
 
+struct ST_HTML_URLS
+{
+	std::vector<std::string>	vecstrHTMLURLs;
+};
+
 #endif

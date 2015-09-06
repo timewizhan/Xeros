@@ -10,12 +10,17 @@ class CHTMLReader
 	std::vector<ST_HTML_TAG_DATA>	m_vecstHTMLTag;
 
 	DWORD ReadHTMLData();
+
+	/*
+		following method use only for google search
+	*/
+	DWORD ModifyURL(std::string &refstrUR);
 public:
 	CHTMLReader();
 	~CHTMLReader();
 
 	DWORD ParseHTML(std::string &refstrHTMLData);
-	DWORD GetURL(std::string &refstrURL);
+	DWORD GetURL(ST_HTML_URLS &refstHTMLURL);
 };
 
 
