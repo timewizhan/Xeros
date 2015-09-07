@@ -1,4 +1,8 @@
+#ifndef _SERVICE_
+#define _SERVICE_
+
 #include "..\Common\Common.h"
+#include <winsvc.h>
 
 class CService
 {
@@ -33,3 +37,5 @@ public:
 	DWORD StartSvc(void);  
 	DWORD StopSvc(void);   
 };
+
+#endif

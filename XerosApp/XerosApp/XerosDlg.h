@@ -4,14 +4,28 @@
 
 #pragma once
 
+#include <vector>
+#include <string>
+
+#include "Common\Common.h"
+#include "MainOperation\Operation.h"
+
 // CXerosDlg dialog
 class CXerosDlg : public CDialog
 {
 	BOOL bTrayActive;
 	BOOL bDialogShow;
 
+	BOOL m_bStartState;
 	BOOL m_bServiceStart;
 	BOOL m_bGetURLs;
+
+	std::vector<std::string>	m_vecURLContents;
+
+	/*
+		Main Operation
+	*/
+	COperation *m_pOperation;
 // Construction
 public:
 	CXerosDlg(CWnd* pParent = NULL);	// standard constructor
@@ -49,4 +63,5 @@ public:
 	afx_msg void OnWindowPosChanging(WINDOWPOS* lpwndpos);
 	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
 	afx_msg void OnXerosClose();
+	afx_msg void OnUpdateXerosStart(CCmdUI *pCmdUI);
 };

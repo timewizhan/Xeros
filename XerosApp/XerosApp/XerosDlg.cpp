@@ -54,7 +54,9 @@ CXerosDlg::CXerosDlg(CWnd* pParent /*=NULL*/)
 	bTrayActive(FALSE),
 	bDialogShow(FALSE),
 	m_bServiceStart(FALSE),
-	m_bGetURLs(FALSE)
+	m_bGetURLs(FALSE),
+	m_bStartState(TRUE),
+	m_pOperation(NULL)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_XEROS_TRAY);
 }
@@ -83,6 +85,7 @@ BEGIN_MESSAGE_MAP(CXerosDlg, CDialog)
 	ON_WM_WINDOWPOSCHANGING()
 	ON_WM_CONTEXTMENU()
 	ON_COMMAND(ID_XEROS_CLOSE, &CXerosDlg::OnXerosClose)
+	ON_UPDATE_COMMAND_UI(ID_XEROS_START, &CXerosDlg::OnUpdateXerosStart)
 END_MESSAGE_MAP()
 
 
@@ -138,6 +141,11 @@ BOOL CXerosDlg::OnInitDialog()
 	bTrayActive = TRUE;
 	::Shell_NotifyIcon(NIM_ADD, &stTaskBaricon);
 
+	/*
+		allocate memory of Main Operation class
+	*/
+	m_pOperation = new COperation("");
+
 	PostMessage(WM_SHOWWINDOW, FALSE, SW_OTHERUNZOOM);
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -156,6 +164,40 @@ LRESULT CXerosDlg::OnMessageFromTrayIcon(WPARAM wParam, LPARAM lParam)
 			CMenu *pSubMenu = NULL;
 			pSubMenu = m_menu.GetSubMenu(0);
 		
+			/*
+				Start / End State
+				If m_bStartState is TRUE, it's Start state.
+				If m_bStartState is FALSE, it's End state.
+			*/
+			if (m_bStartState) {
+				m_menu.ModifyMenuW(ID_XEROS_START, MF_BYCOMMAND | MF_STRING, ID_XEROS_START, TEXT("Start"));
+			}
+			else {
+				m_menu.ModifyMenuW(ID_XEROS_START, MF_BYCOMMAND | MF_STRING, ID_XEROS_START, TEXT("End"));
+			}
+
+			/*
+				Insert URL
+				if URLContents have more then 1 item, add items
+				otherwise, add message (nothing)
+			*/
+			CMenu *pURLMenu = NULL;
+			pURLMenu = m_menu.GetSubMenu(0)->GetSubMenu(1);
+			if (m_vecURLContents.size() > 0) {
+				pURLMenu->DeleteMenu(0, MF_BYPOSITION);
+
+				std::vector<std::string>::size_type i;
+				for (i = 0; i < m_vecURLContents.size(); i++) {
+					std::wstring wURLContents;
+					wURLContents.clear();
+					wURLContents.assign(m_vecURLContents[i].begin(), m_vecURLContents[i].end());
+					pURLMenu->AppendMenuW(MF_STRING, 2001 + 2 * i, wURLContents.c_str());
+				}
+			}
+			else {
+				pURLMenu->AppendMenuW(MF_STRING, 2001 + 2 * 0, TEXT("Nothing"));
+			}
+
 			BOOL bRet;
 			bRet = pSubMenu->TrackPopupMenu(/*TPM_LEFTALIGN | */TPM_RIGHTBUTTON, pos.x, pos.y, this);
 		}
@@ -324,5 +366,22 @@ void CXerosDlg::OnXerosClose()
 	/*
 		Xeros Dialog is exited
 	*/
+	if (m_pOperation != NULL) {
+		delete m_pOperation;
+	}
 	OnOK();
+}
+
+
+void CXerosDlg::OnUpdateXerosStart(CCmdUI *pCmdUI)
+{
+	// TODO: Add your command update UI handler code here
+	if (m_bStartState) {
+		m_pOperation->StartOperation();
+		m_bStartState = FALSE;
+	}
+	else {
+		m_pOperation->StopOperation();
+		m_bStartState = TRUE;
+	}
 }
