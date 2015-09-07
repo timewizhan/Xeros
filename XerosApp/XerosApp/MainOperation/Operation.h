@@ -28,6 +28,7 @@ class COperation
 		below variable is included in decision 
 	*/
 	BOOL m_bStartOperatoin;
+	BOOL m_bCreateService;
 	BOOL m_bStartService;
 	BOOL m_bRealTimeCheck;
 

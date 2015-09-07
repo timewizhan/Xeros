@@ -144,7 +144,34 @@ BOOL CXerosDlg::OnInitDialog()
 	/*
 		allocate memory of Main Operation class
 	*/
-	m_pOperation = new COperation("");
+	LPTSTR lpBuffer = NULL;
+	BOOL bExist;
+	GetCurrentDirectory(sizeof(lpBuffer), lpBuffer);
+#ifdef _UNICODE
+	std::wstring wstrFilePath = lpBuffer;
+	wstrFilePath += L"/";
+	wstrFilePath += DRIVER_FILE_NAME;
+
+	bExist = PathFileExists(wstrFilePath.c_str());
+	std::string strFilePath;
+	strFilePath.assign(wstrFilePath.begin(), wstrFilePath.end());
+#else
+	std::string strFilePath;
+	strFilePath = lpBuffer;
+	strFilePath += L"/";
+	strFilePath += DRIVER_FILE_NAME;
+	bExist = PathFileExists(strFilePath.c_str());
+#endif
+
+	if (bExist) {
+		m_pOperation = new COperation(strFilePath.c_str());
+		if (!m_pOperation) {
+			MessageBox(L"Fail to operate xeros");
+		}
+	}
+	else {
+		MessageBox(L"File not exist");
+	}
 
 	PostMessage(WM_SHOWWINDOW, FALSE, SW_OTHERUNZOOM);
 	return TRUE;  // return TRUE  unless you set the focus to a control
