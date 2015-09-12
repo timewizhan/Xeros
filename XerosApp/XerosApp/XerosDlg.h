@@ -9,6 +9,7 @@
 
 #include "Common\Common.h"
 #include "MainOperation\Operation.h"
+#include "Browser\Browser.h"
 
 // CXerosDlg dialog
 class CXerosDlg : public CDialog
@@ -20,12 +21,12 @@ class CXerosDlg : public CDialog
 	BOOL m_bServiceStart;
 	BOOL m_bGetURLs;
 
-	std::vector<std::string>	m_vecURLContents;
-
 	/*
 		Main Operation
 	*/
 	COperation *m_pOperation;
+	CBrowser	*m_pBrowser;
+
 // Construction
 public:
 	CXerosDlg(CWnd* pParent = NULL);	// standard constructor
