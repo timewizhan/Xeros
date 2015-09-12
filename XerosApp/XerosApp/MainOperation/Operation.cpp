@@ -1,5 +1,6 @@
 #include "Operation.h"
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 COperation::COperation(std::string strServiceFilePath) : 
 m_bCreateService(FALSE), 
@@ -8,7 +9,8 @@ m_bRealTimeCheck(FALSE),
 m_bStartOperatoin(TRUE),
 m_pAnalyzer(NULL),
 m_pNetwork(NULL),
-m_pDataBase(NULL)
+m_pDataBase(NULL),
+m_pDataSingleton(NULL)
 {
 	/*
 		when creating operation class, service is registered first of all
@@ -102,6 +104,12 @@ m_pDataBase(NULL)
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to initialize network");
 	}
+
+	m_pDataSingleton = CDataSingleton::GetInstance();
+	if (!m_pDataSingleton) {
+		ErrorLog("Fail to initialize DataSingleton");
+	}
+
 	return;
 }
 
@@ -160,7 +168,7 @@ DWORD COperation::StartUrlQuery(ST_PROPER_WORD_RET &refstProperWordRet)
 		ErrorLog("Search words have none");
 		return E_RET_FAIL;
 	}
-
+	
 	DWORD dwRet;
 	ST_RECV_DATA stRecvData;
 	//dwRet = m_pNetwork->QueryFromNetwork(stSearchReq, stRecvData);
@@ -183,23 +191,35 @@ DWORD COperation::StartUrlQuery(ST_PROPER_WORD_RET &refstProperWordRet)
 		ErrorLog("Fail to parse HTML String [%d]", stRecvData.dwTotalSize);
 		return dwRet;
 	}
-
 	
 	dwRet = HTMLReader.GetURL(m_stHTMLURLs);
 	if (dwRet != E_RET_SUCCESS) {
 		ErrorLog("Fail to get URL");
 		return dwRet;
 	}
+
+	dwRet = m_pDataSingleton->ChangeQueryTypeToBrowser(m_stHTMLURLs);
+	if (dwRet != E_RET_SUCCESS) {
+		ErrorLog("Fail to change query type to browser");
+		return dwRet;
+	}
+
 	return dwRet;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 DWORD COperation::StartOperation()
 {
-	try
+	
+	DWORD dwRet, dwFailThreashold = 0;
+	/*
+		'while' is operated until user click button about exit
+		So, if while operation is executed once, this program do one cycle
+	*/
+	while (m_bStartOperatoin && dwFailThreashold < FAIL_THRESHOLD)
 	{
-		DWORD dwRet;
-		while (m_bStartOperatoin) {
+		try 
+		{
 			dwRet = StartRealTimeCheck();
 			if (dwRet == E_RET_SUCCESS) {
 				/*
@@ -212,7 +232,7 @@ DWORD COperation::StartOperation()
 					}
 					m_bStartService = TRUE;
 				}
-				
+
 			}
 			else if (dwRet != E_RET_CHECK_FAIL) {
 				continue;
@@ -227,17 +247,26 @@ DWORD COperation::StartOperation()
 			if (dwRet != E_RET_SUCCESS) {
 				throw std::exception("Fail to start analysis");
 			}
-			
+
 			dwRet = StartUrlQuery(stProperWordRet);
 			if (dwRet != E_RET_SUCCESS) {
 				throw std::exception("Fail to start url query");
 			}
 		}
+		catch (std::exception &e) {
+			ErrorLog("Fail to operate main part [%s]", e.what());
+			dwFailThreashold++;
+			continue;
+		}
+
+		/*
+			Threshold is initialized. 
+			because while is normally operated
+		*/
+		dwFailThreashold = 0;
+		// while syntax keep going...
 	}
-	catch (std::exception &e) {
-		ErrorLog("Fail to operate main part [%s]", e.what());
-		return E_RET_FAIL;
-	}
+
 	return E_RET_SUCCESS;
 }
 

