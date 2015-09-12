@@ -8,8 +8,10 @@
 #include "..\MainOperation\Network\Network.h"
 #include "..\MainOperation\SearchWord\SearchWordType.h"
 #include "..\HTMLParser\HTMLReader.h"
+#include "DataSingletonh.h"
 
 #define SERVICE_NAME "Xeros"
+#define FAIL_THRESHOLD 10
 
 class COperation
 {
@@ -20,6 +22,7 @@ class COperation
 	CRealTimeCheck	*m_pRealTimeCheck;
 	CAnalyzer		*m_pAnalyzer;
 	CNetwork		*m_pNetwork;
+	CDataSingleton  *m_pDataSingleton;
 	HANDLE			m_pDataBase;
 
 	ST_HTML_URLS	m_stHTMLURLs;
