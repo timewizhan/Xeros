@@ -116,6 +116,7 @@
     <ClInclude Include="HTMLParser\HTMLTag.h" />
     <ClInclude Include="HTMLParser\HTMLType.h" />
     <ClInclude Include="MainOperation\Analyzer.h" />
+    <ClInclude Include="MainOperation\DataSingletonh.h" />
     <ClInclude Include="MainOperation\Network\Network.h" />
     <ClInclude Include="MainOperation\Network\NetworkType.h" />
     <ClInclude Include="MainOperation\Operation.h" />
@@ -155,6 +156,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="MainOperation\Analyzer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MainOperation\DataSingleton.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="MainOperation\Network\Network.cpp">

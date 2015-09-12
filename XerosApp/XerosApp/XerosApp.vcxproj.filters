@@ -133,12 +133,12 @@
     <ClInclude Include="RealTimeCheck\RealTimeCheckType.h">
       <Filter>RealtimeCheck</Filter>
     </ClInclude>
+    <ClInclude Include="MainOperation\DataSingletonh.h">
+      <Filter>MainOperation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XerosApp.cpp">
-      <Filter>XerosApp</Filter>
-    </ClCompile>
-    <ClCompile Include="XerosDlg.cpp">
       <Filter>XerosApp</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
@@ -185,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="RealTimeCheck\RealTimeCheck.cpp">
       <Filter>RealtimeCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="XerosDlg.cpp">
+      <Filter>XerosApp</Filter>
+    </ClCompile>
+    <ClCompile Include="MainOperation\DataSingleton.cpp">
+      <Filter>MainOperation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
