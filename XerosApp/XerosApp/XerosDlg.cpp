@@ -7,6 +7,8 @@
 #include "XerosDlg.h"
 #include "afxdialogex.h"
 
+#include "MainOperation\DataSingletonh.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -56,7 +58,8 @@ CXerosDlg::CXerosDlg(CWnd* pParent /*=NULL*/)
 	m_bServiceStart(FALSE),
 	m_bGetURLs(FALSE),
 	m_bStartState(TRUE),
-	m_pOperation(NULL)
+	m_pOperation(NULL),
+	m_pBrowser(NULL)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_XEROS_TRAY);
 }
@@ -142,6 +145,40 @@ BOOL CXerosDlg::OnInitDialog()
 	::Shell_NotifyIcon(NIM_ADD, &stTaskBaricon);
 
 	/*
+		initialize log 
+	*/
+	DWORD dwRet;
+	dwRet = InitLog(E_LOG_FILE);
+	if (dwRet != E_RET_SUCCESS) {
+		MessageBox(L"Fail to init log");
+		// Must exit xeros app
+		// because this program cannot record log to monitor operation of xeros program
+		OnOK();
+	}
+
+	/*
+		initialize Browser 
+	*/
+	m_pBrowser = new CBrowser();
+	if (!m_pBrowser) {
+		MessageBox(L"Fail to init browser");
+		OnOK();
+	}
+	
+	// default internet type is explorer
+	dwRet = m_pBrowser->InitBrowser(E_BROWSER_IE);
+	if (dwRet != E_RET_SUCCESS) {
+		dwRet = m_pBrowser->InitBrowser(E_BROWSER_CHROME);
+		if (dwRet != E_RET_SUCCESS) {
+			/*
+				Cannot find internet browser
+			*/
+			MessageBox(L"Fail to init browser");
+			OnOK();
+		}
+	}
+
+	/*
 		allocate memory of Main Operation class
 	*/
 	LPTSTR lpBuffer = NULL;
@@ -167,10 +204,15 @@ BOOL CXerosDlg::OnInitDialog()
 		m_pOperation = new COperation(strFilePath.c_str());
 		if (!m_pOperation) {
 			MessageBox(L"Fail to operate xeros");
+			OnOK();
 		}
 	}
 	else {
+		/*
+			You cannot execute this program because driver is not loaded
+		*/
 		MessageBox(L"File not exist");
+		OnOK();
 	}
 
 	PostMessage(WM_SHOWWINDOW, FALSE, SW_OTHERUNZOOM);
@@ -210,14 +252,33 @@ LRESULT CXerosDlg::OnMessageFromTrayIcon(WPARAM wParam, LPARAM lParam)
 			*/
 			CMenu *pURLMenu = NULL;
 			pURLMenu = m_menu.GetSubMenu(0)->GetSubMenu(1);
-			if (m_vecURLContents.size() > 0) {
+
+			CDataSingleton *pDataSingleton = NULL;
+			pDataSingleton = CDataSingleton::GetInstance();
+			BOOL bData = TRUE;
+			if (pDataSingleton == NULL) {
+				bData = FALSE;
+			}
+
+			ST_RESULT_URLS stResultURLs;
+			DWORD dwRet;
+			dwRet = pDataSingleton->GetURLs(stResultURLs);
+			if (dwRet != E_RET_SUCCESS) {
+				bData = FALSE;
+			}
+			
+			/*
+				if data is not received from DataSingleton, 
+				Dialog cannot input data to trayicon bar
+			*/
+			if (bData && stResultURLs.vecstrURLs.size() > 0) {
 				pURLMenu->DeleteMenu(0, MF_BYPOSITION);
 
 				std::vector<std::string>::size_type i;
-				for (i = 0; i < m_vecURLContents.size(); i++) {
+				for (i = 0; i <stResultURLs.vecstrURLs.size(); i++) {
 					std::wstring wURLContents;
 					wURLContents.clear();
-					wURLContents.assign(m_vecURLContents[i].begin(), m_vecURLContents[i].end());
+					wURLContents.assign(stResultURLs.vecstrURLs[i].begin(), stResultURLs.vecstrURLs[i].end());
 					pURLMenu->AppendMenuW(MF_STRING, 2001 + 2 * i, wURLContents.c_str());
 				}
 			}
