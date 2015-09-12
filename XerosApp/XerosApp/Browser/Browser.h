@@ -3,18 +3,29 @@
 
 #include "..\Common\Common.h"
 #include "..\Common\DataType.h"
-#include "..\MainOperation\Network\Network.h"
+#include "..\HTMLParser\HTMLStruct.h"
 
 class CBrowser
 {
-	ST_BROWSER	m_stBrowser;
+	ST_BROWSER			m_stBrowser;
+	ST_RESULT_URLS		m_stResultURLs;
+	
+	static CBrowser		*m_pBrowser;
 public:
 	CBrowser();
 	~CBrowser();
 
 	DWORD InitBrowser(E_BROWSER_TYPE eBrowserType);
-	DWORD ExecuteBrowserWithArgs(ST_RESULT_URLS &refstResultUrls);
-};
 
+	DWORD ExecuteBrowserWithArg(std::string strURLs);
+	DWORD ExecuteBrowserWithArgs(ST_RESULT_URLS &refstResultUrls);
+
+	/*
+		Browser class is singleton instance
+	*/
+	inline static CBrowser* GetBrowserInstance() {
+		return NULL;
+	}
+};
 
 #endif
