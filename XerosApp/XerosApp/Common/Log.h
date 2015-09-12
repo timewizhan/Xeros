@@ -22,7 +22,7 @@ enum E_LOG_LEVEL
 extern char *g_pszPath;
 extern E_LOG_TYPE g_eLogtype;
 
-DWORD InitLog(E_LOG_TYPE eLogType, char *pszPath);
+DWORD InitLog(E_LOG_TYPE eLogType);
 DWORD ErrorLog(const char *cformat, ...);
 DWORD DebugLog(const char *cformat, ...);
 DWORD WarningLog(const char *cformat, ...);
