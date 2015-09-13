@@ -12,14 +12,14 @@ DWORD InitLog(E_LOG_TYPE eLogType)
 	g_eLogtype = eLogType;
 	pLogFile = NULL;
 
-	if (eLogType == E_LOG_FILE)
+	if (eLogType == E_LOG_CONSOLE)
 		g_eLogtype = E_LOG_CONSOLE;
 	else if (eLogType == E_LOG_FILE) {
-		LPWSTR lpwBuffer = NULL;
+		TCHAR lpwBuffer[512] = { 0 };
 		GetCurrentDirectory(512, lpwBuffer);
 		std::wstring strBuffer = lpwBuffer;
 		std::wstring strFileName = LOG_FILE_NAME;
-		strBuffer += L"/" + strFileName;
+		strBuffer += L"\\" + strFileName;
 
 		strLogFileFullPath.assign(strBuffer.begin(), strBuffer.end());
 		int iRet;
@@ -56,6 +56,7 @@ DWORD ErrorLog(const char *cformat, ...)
 			return E_RET_FAIL;
 		}
 		fputs(szBuf, pLogFile);
+		fputs("\n", pLogFile);
 		::fclose(pLogFile);
 		break;
 	default:
@@ -88,6 +89,7 @@ DWORD DebugLog(const char *cformat, ...)
 			return E_RET_FAIL;
 		}
 		fputs(szBuf, pLogFile);
+		fputs("\n", pLogFile);
 		::fclose(pLogFile);
 		break;
 	default:
