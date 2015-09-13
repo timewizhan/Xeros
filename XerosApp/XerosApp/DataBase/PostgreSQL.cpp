@@ -45,7 +45,8 @@ DWORD CPostgreSQL::_InsertToDB(ST_DB_SQL &refstDBSQL)
 DWORD CPostgreSQL::_UpdateToDB(ST_DB_SQL &refstDBSQL)
 {
 	pPGResult = PQexec(pPGConn, refstDBSQL.strSQL.c_str());
-	if (PQresultStatus(pPGResult) != PGRES_COMMAND_OK) {
+	DWORD dwPQresultStatus = PQresultStatus(pPGResult);
+	if (dwPQresultStatus != PGRES_COMMAND_OK && dwPQresultStatus != PGRES_TUPLES_OK) {
 		fprintf(stderr, "Fail to insert to database: %s", PQerrorMessage(pPGConn));
 		PQclear(pPGResult);
 		PQfinish(pPGConn);
@@ -70,14 +71,18 @@ DWORD CPostgreSQL::_QueryFromDB(ST_DB_SQL &refstDBSQL, ST_DB_RESULT &refstDBResu
 
 	DWORD i = 0, j = 0;
 	for (i = 0; i < dwRow; i++) {
-		std::string strValue;
+		std::string strValue, strRow;
+		strRow.clear();
 		for (j = 0; j < dwCol; j++) {
 			strValue = PQgetvalue(pPGResult, i, j);
 			if (j + 1 < dwCol) {
-				strValue += ", ";
+				strRow += strValue + ", ";
+			}
+			else {
+				strRow += strValue;
 			}
 		}
-		refstDBResult.vecstrResult.push_back(strValue);
+		refstDBResult.vecstrResult.push_back(strRow);
 	}
 	return E_RET_SUCCESS;
 }

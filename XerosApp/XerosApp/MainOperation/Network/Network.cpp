@@ -195,15 +195,37 @@ DWORD CNetwork::InitNetworkFromCURL()
 	curl_easy_setopt(m_pCURL, CURLOPT_HEADER, 0);
 	curl_easy_setopt(m_pCURL, CURLOPT_VERBOSE, 0);
 	curl_easy_setopt(m_pCURL, CURLOPT_FOLLOWLOCATION, 1L);
-	curl_easy_setopt(m_pCURL, CURLOPT_FILE, "./output");
+
+	TCHAR lpBuffer[512] = { 0 };
+	GetCurrentDirectory(sizeof(lpBuffer), lpBuffer);
+	std::wstring wstrFilePath = lpBuffer;
+	wstrFilePath += L"\\";
+	wstrFilePath += CURL_OUTPUT_FILE_NAME;
+	m_strFilePath.assign(wstrFilePath.begin(), wstrFilePath.end());
+
+	int err;
+	err = fopen_s(&m_pFile, m_strFilePath.c_str(), "w");
+	if (err != 0) {
+		ErrorLog("Fail to open file [%s]", m_strFilePath.c_str());
+		return E_RET_FAIL;
+	}
+
+	curl_easy_setopt(m_pCURL, CURLOPT_FILE, m_pFile);
 	return E_RET_SUCCESS;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 DWORD CNetwork::QueryFromNetworkFromCURL(ST_SEARCH_REQ &refstSearchReq, ST_RECV_DATA &refstRecvData)
 {
+	DWORD dwRet;
 	std::vector<std::string>::iterator vecIter;
 	for (vecIter = refstSearchReq.vecstrStrings.begin(); vecIter != refstSearchReq.vecstrStrings.end(); vecIter++) {
+		dwRet = InitNetworkFromCURL();
+		if (dwRet != E_RET_SUCCESS) {
+			ErrorLog("Fail to initialize network");
+			continue;
+		}
+
 		std::string strSearchWord = (*vecIter);
 		std::string strFullSearch = "http://www.google.com/search?q=" + strSearchWord;
 
@@ -242,6 +264,10 @@ DWORD CNetwork::QueryFromNetworkFromCURL(ST_SEARCH_REQ &refstSearchReq, ST_RECV_
 		}
 		DebugLog("Download Speed : %ld bytes/sec", statDouble);
 
+		::fclose(m_pFile);
+		curl_easy_cleanup(m_pCURL);
+		curl_global_cleanup();
+
 		DWORD dwRet;
 		std::string strHTMLData;
 		dwRet = ReadHTMLDataFromFile(strHTMLData);
@@ -260,7 +286,7 @@ DWORD CNetwork::ReadHTMLDataFromFile(std::string &refstrHTMLData)
 {
 	FILE *pFile = NULL;
 	DWORD dwRet;
-	dwRet = fopen_s(&pFile, "./output", "r");
+	dwRet = fopen_s(&pFile, m_strFilePath.c_str(), "r");
 	if (dwRet != 0) {
 		ErrorLog("Fail to open file");
 		return E_RET_FAIL;

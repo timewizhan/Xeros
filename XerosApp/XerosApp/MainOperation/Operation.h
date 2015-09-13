@@ -13,6 +13,8 @@
 #define SERVICE_NAME "Xeros"
 #define FAIL_THRESHOLD 10
 
+static HANDLE g_hEvent;
+
 class COperation
 {
 	/*
@@ -24,6 +26,7 @@ class COperation
 	CNetwork		*m_pNetwork;
 	CDataSingleton  *m_pDataSingleton;
 	HANDLE			m_pDataBase;
+	HANDLE			m_hThread;
 
 	ST_HTML_URLS	m_stHTMLURLs;
 
@@ -48,9 +51,14 @@ public:
 
 	DWORD StartOperation();
 	DWORD StopOperation();
+
+	void SetStartOperation(BOOL bValue);
+
 	inline ST_HTML_URLS GetUrl() {
 		return m_stHTMLURLs;
 	}
 };
+
+//unsigned int __stdcall CheckEventThread(void *param);
 
 #endif

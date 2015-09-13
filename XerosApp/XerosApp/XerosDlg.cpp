@@ -179,14 +179,23 @@ BOOL CXerosDlg::OnInitDialog()
 	}
 
 	/*
+		initailize  Event Obejct 
+	*/
+	//g_hEvent = ::CreateEvent(NULL, TRUE, FALSE, L"XerosEvent");
+	//if (g_hEvent == NULL) {
+	//	MessageBox(L"Fail to init event object");
+	//	OnOK();
+	//}
+
+	/*
 		allocate memory of Main Operation class
 	*/
-	LPTSTR lpBuffer = NULL;
+	TCHAR lpBuffer[512] = { 0 };
 	BOOL bExist;
 	GetCurrentDirectory(sizeof(lpBuffer), lpBuffer);
 #ifdef _UNICODE
 	std::wstring wstrFilePath = lpBuffer;
-	wstrFilePath += L"/";
+	wstrFilePath += L"\\";
 	wstrFilePath += DRIVER_FILE_NAME;
 
 	bExist = PathFileExists(wstrFilePath.c_str());
@@ -199,7 +208,8 @@ BOOL CXerosDlg::OnInitDialog()
 	strFilePath += DRIVER_FILE_NAME;
 	bExist = PathFileExists(strFilePath.c_str());
 #endif
-
+	///
+	bExist = TRUE;
 	if (bExist) {
 		m_pOperation = new COperation(strFilePath.c_str());
 		if (!m_pOperation) {
@@ -243,6 +253,7 @@ LRESULT CXerosDlg::OnMessageFromTrayIcon(WPARAM wParam, LPARAM lParam)
 			}
 			else {
 				m_menu.ModifyMenuW(ID_XEROS_START, MF_BYCOMMAND | MF_STRING, ID_XEROS_START, TEXT("End"));
+				SetEvent(g_hEvent);
 			}
 
 			/*

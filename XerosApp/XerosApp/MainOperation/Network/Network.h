@@ -17,7 +17,9 @@ class CNetwork
 	ST_NETWORK m_stNetwork;
 
 	CURL		*m_pCURL;
+	FILE		*m_pFile;
 	std::string	strFileName;
+	std::string		m_strFilePath;
 
 	DWORD BuildHTTPReq(char *pBuf, const char *pKeyWord);
 	DWORD ReceiveDataFromURL(ST_RECV_DATA &refstRecvData);
@@ -27,7 +29,7 @@ class CNetwork
 		Only for CURL
 	*/
 	DWORD ReadHTMLDataFromFile(std::string &refstrHTMLData);
-
+	DWORD InitNetworkFromCURL();
 public:
 	CNetwork();
 	~CNetwork();
@@ -38,7 +40,6 @@ public:
 	/*
 		following method is used for only cURL
 	*/
-	DWORD InitNetworkFromCURL();
 	DWORD QueryFromNetworkFromCURL(ST_SEARCH_REQ &refstSearchReq, ST_RECV_DATA &refstRecvData);
 };
 

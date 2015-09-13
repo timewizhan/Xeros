@@ -8,7 +8,7 @@ DWORD CDataSingleton::ChangeQueryTypeToBrowser(ST_HTML_URLS &refstHTMLURLs)
 	}
 
 	DWORD i;
-	for (i = 0; refstHTMLURLs.vecstrHTMLURLs.size(); i++) {
+	for (i = 0; i < refstHTMLURLs.vecstrHTMLURLs.size(); i++) {
 		std::string strValue = refstHTMLURLs.vecstrHTMLURLs[i];
 		m_stResultURLs.vecstrURLs.push_back(strValue);
 	}

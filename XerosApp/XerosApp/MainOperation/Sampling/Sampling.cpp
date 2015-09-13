@@ -71,13 +71,78 @@ DWORD CSampling::SupplementWorks(std::vector<std::string> &refvecstrEnumWords)
 	std::vector<std::string>::iterator vecIterEnumWords;
 	for (vecIterEnumWords = refvecstrEnumWords.begin(); vecIterEnumWords != refvecstrEnumWords.end(); vecIterEnumWords++) {
 		std::string strValue = (*vecIterEnumWords);
-		ST_DB_SQL stDBSQLInsert;
-		stDBSQLInsert.strSQL = "INSERT INTO \"Dictionary\"(word) VALUES('" + strValue + "'); ";
-		dwRet = InsertToDB(m_hDataBase, stDBSQLInsert);
-		if (dwRet != 0)
+		ST_DB_SQL stDBQuerySQL;
+		stDBQuerySQL.strSQL = "SELECT sequence, frequency, word FROM \"WordRelation\" WHERE word = \'" + strValue + "\'";
+		ST_DB_RESULT stDBResult;
+		dwRet = QueryFromDB(m_hDataBase, stDBQuerySQL, stDBResult);
+		if (dwRet != E_RET_SUCCESS) {
+			ErrorLog("Fail to query [%s] from database", strValue);
 			continue;
+		}
+
+		// word is not in database
+		if (stDBResult.vecstrResult.size() < 1) {
+			/* 
+				because the word is not in database, word have to be initialized as default.
+				default is 1
+
+				Database example : stDBSQLInsert.strSQL = "INSERT INTO \"Dictionary\"(word) VALUES('" + strValue + "');
+			*/
+			ST_DB_SQL stDBInsertSQL;
+			stDBInsertSQL.strSQL = "INSERT INTO \"WordRelation\"(sequence, frequency, word) VALUES(1, 1, \'" + strValue + "\')";
+			dwRet = InsertToDB(m_hDataBase, stDBInsertSQL);
+			if (dwRet != E_RET_SUCCESS) {
+				ErrorLog("Fail to insert Value in DataBase");
+				continue;
+			}
+		}
+		// word is in database, so must update data in database
+		else {
+			std::vector<std::string>::iterator vecIter;
+			for (vecIter = stDBResult.vecstrResult.begin(); vecIter != stDBResult.vecstrResult.end(); vecIter++) {
+				std::string strRow = (*vecIter);
+				DWORD dwFirstPos = 0, dwSecondPos = 0;
+
+				// Value to get from database is word, sequence, frequency
+				std::string strDBWord, strSequence, strFrequency;
+				DWORD dwCount = 0;
+				while (dwSecondPos < strRow.size()) {
+					dwSecondPos = strRow.find_first_of(", ", dwFirstPos);
+					if (dwSecondPos == std::string::npos) {
+						strDBWord = strRow.substr(dwFirstPos, strRow.size() - dwFirstPos);
+					}
+
+					// if Count is 0, Value is sequence
+					std::string strParam;
+					if (dwCount == 0) {
+						strParam = strRow.substr(dwFirstPos, dwSecondPos - dwFirstPos);
+						DWORD dwValue = ::atoi(strParam.c_str()) + 1;
+						strSequence = std::to_string(dwValue);
+					}
+					// if Count is 0, Value is frequency
+					else if (dwCount == 1) {
+						strParam = strRow.substr(dwFirstPos, dwSecondPos - dwFirstPos);
+						DWORD dwValue = ::atoi(strParam.c_str()) + 1;
+						strFrequency = std::to_string(dwValue);
+					}
+
+					// 2 is charater size (, )
+					dwFirstPos = dwSecondPos + 2;
+					dwCount++;
+				}
+				// each value update in database
+				ST_DB_SQL stDBUpdateSQL;
+				stDBUpdateSQL.strSQL = "UPDATE \"WordRelation\" SET sequence=" + strSequence + ", frequency=" + strFrequency + " WHERE word=\'" + strValue + "\'";
+				dwRet = UpdateToDB(m_hDataBase, stDBUpdateSQL);
+				if (dwRet != E_RET_SUCCESS) {
+					ErrorLog("Fail to update Value in DataBase");
+					continue;
+				}
+			}
+		}
 	}
-	return 0;
+
+	return E_RET_SUCCESS;
 }
 
 DWORD CSampling::SaveToString(std::vector<std::string> &refvecstrEnumWords, std::string &refstrOutput)
@@ -94,7 +159,19 @@ DWORD CSampling::SaveToString(std::vector<std::string> &refvecstrEnumWords, std:
 	}
 	// delete last character (blank)"
 	refstrOutput.resize(refstrOutput.size() - 1);
-	return 0;
+
+	/*
+		Save string to DB
+	*/
+	DWORD dwRet;
+	ST_DB_SQL stDBInsertSQL;
+	stDBInsertSQL.strSQL = "INSERT INTO \"History\"(search) VALUES(\'" + refstrOutput + "\')";
+	dwRet = InsertToDB(m_hDataBase, stDBInsertSQL);
+	if (dwRet != E_RET_SUCCESS) {
+		ErrorLog("Fail to insert Value in DataBase");
+		dwRet = E_RET_FAIL;
+	}
+	return dwRet;
 }
 
 DWORD CSampling::CraftSentenceFromSearch(std::string &refstrSearchWord, std::string &refstrOutput)
@@ -102,30 +179,43 @@ DWORD CSampling::CraftSentenceFromSearch(std::string &refstrSearchWord, std::str
 	DWORD dwRet;
 	try
 	{
+		/*
+			sentence to get from key log data is separated by order
+		*/
 		std::vector<std::string> vecstrEnumWords;
 		dwRet = EnumWordByOrder(refstrSearchWord, vecstrEnumWords);
 		if (dwRet != 0) {
-			throw std::exception("");
+			throw std::exception("Fail to enum word by order");
 		}
 
+		/*
+			word separated is not clear, because they have words not allowed (ex: in, a, ...)
+			So, following method delete
+		*/
 		dwRet = SortoutWords(vecstrEnumWords);
 		if (dwRet != 0) {
-			throw std::exception("");
+			throw std::exception("Fail to sort out word");
 		}
 
-		/*dwRet = SupplementWorks(vecstrEnumWords);
+		/*
+			each word save to database -> relation word table
+		*/
+		dwRet = SupplementWorks(vecstrEnumWords);
 		if (dwRet != 0) {
-			throw std::exception("");
-		}*/
+			throw std::exception("Fail to supplement works");
+		}
 
+		/*
+			sentence save to database -> history table
+		*/
 		dwRet = SaveToString(vecstrEnumWords, refstrOutput);
 		if (dwRet != 0) {
-			throw std::exception("");
+			throw std::exception("Fail to save to string");
 		}
 	}
 	catch (std::exception &e)
 	{
 		printf("%s\n", e.what());
 	}
-	return 0;
+	return E_RET_SUCCESS;
 }
